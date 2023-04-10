@@ -1,26 +1,26 @@
-import React from "react";
-import Avatar from "../../Avatar";
-import { Link, useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import moment from "moment";
-import { GLOBALTYPES } from "../../../redux/actions/globalTypes";
-import { deletePost } from "../../../redux/actions/postAction";
-import { BASE_URL } from "../../../utils/config";
+import React from 'react';
+import Avatar from '../../Avatar';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import moment from 'moment';
+import { GLOBALTYPES } from '../../../redux/actions/globalTypes';
+import { deletePost } from '../../../redux/actions/postAction';
+import { BASE_URL } from '../../../utils/config';
 
 const CardHeader = ({ post }) => {
   const { auth, socket } = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleEditPost = () => {
     dispatch({ type: GLOBALTYPES.STATUS, payload: { ...post, onEdit: true } });
   };
 
   const handleDeletePost = () => {
-    if (window.confirm("Bạn muốn xoá bài đăng này?")) {
+    if (window.confirm('Bạn muốn xoá bài đăng này?')) {
       dispatch(deletePost({ post, auth, socket }));
-      return history.push("/");
+      return navigate('/');
     }
   };
 

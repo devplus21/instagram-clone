@@ -3,15 +3,17 @@ import ReactDOM from 'react-dom';
 import './styles/global.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import DataProvider from './redux/store'
-
+import DataProvider from './redux/store';
+import { BrowserRouter } from 'react-router-dom';
 ReactDOM.render(
   <React.StrictMode>
     <DataProvider>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </DataProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 // If you want to start measuring performance in your app, pass a function

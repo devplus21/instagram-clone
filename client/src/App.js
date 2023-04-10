@@ -1,15 +1,11 @@
 import { useEffect } from 'react';
-import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
-
-import PageRender from './customRouter/PageRender';
-import PrivateRouter from './customRouter/PrivateRouter';
+import { Route, Routes } from 'react-router-dom';
 
 import Home from './pages/home';
 import Login from './pages/login';
 import Register from './pages/register';
 import Forgot from './pages/forgotPassword';
 import Reset from './pages/resetPassword';
-import Body from './Body';
 
 import Alert from './components/alert/Alert';
 import Header from './components/header/Header';
@@ -73,40 +69,65 @@ function App() {
   }, [dispatch]);
 
   return (
-    <Router>
+    <div className={`App ${(status || modal) && 'mode'}`}>
       <Alert />
+      <div className="main">
+        {auth.token && <Header />}
+        {status && <StatusModal />}
+        {auth.token && <SocketClient />}
+        {call && <CallModal />}
+        <Routes>
+          <Route path="/" element={auth.token ? <News /> : <Login />} />
+          <Route path="/login" element={auth.token && <Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forgot_password" element={<Forgot />} />
+          <Route path="/reset/:token" element={<Reset />} />
+          <Route path="/profile/:id" element={<Profile />} />
 
-      <input type="checkbox" id="theme" />
-      <div className={`App ${(status || modal) && 'mode'}`}>
-        <div className="main">
-          {auth.token && <Header />}
-          {status && <StatusModal />}
-          {auth.token && <SocketClient />}
-          {call && <CallModal />}
-          <Body />
+          <Route path="/about" element={<About />} />
+          <Route path="/new" element={<News />} />
+          <Route path="/classrooms" element={<Classrooms />} />
+          <Route path="/classroom">
+            <Route path=":id" element={<ClassLayout />}>
+              <Route index element={<HomeClass />} />
+              <Route path="exercise" element={<Exercise />} />
+              <Route path="users" element={<Users />} />
 
-          <Route exact path="/" component={auth.token ? Home : Login} />
+              <Route path="meeting" element={<Meeting />} />
+              <Route path="feedback" element={<Feedback />} />
+              <Route path="point" element={<Point />} />
+            </Route>
+          </Route>
+
+          <Route path="/forum" element={<Forum />} />
+          <Route path="/message" element={<Message />} />
+          <Route path="/admin" element={<AdminRoutes />} />
+
           <Route
-            exact
-            path="/register"
-            component={isLogged ? NotFound : Register}
-          />
-          <Route
-            exact
-            path="/forgot_password"
-            component={isLogged ? NotFound : Forgot}
-          />
-          <Route
-            exact
-            path="/reset/:token"
-            component={isLogged ? NotFound : Reset}
+            path="/admin/*"
+            element={
+              <ProtectedRoutes>
+                <AdminLayout />
+              </ProtectedRoutes>
+            }
           />
 
-          <PrivateRouter exact path="/:page" component={PageRender} />
-          <PrivateRouter exact path="/:page/:id" component={PageRender} />
-        </div>
+          {/* <PrivateRouter path="/:page" element={<RouterRender />} />
+        <PrivateRouter path="/:page/:id" element=
+        {<RouterRender />} /> */}
+
+          {/* <Route
+          path="/admin/*"
+          element={
+            <ProtectedRoute isAdmin={true}>
+              <Admin />
+            </ProtectedRoute>
+          }
+        /> */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </div>
-    </Router>
+    </div>
   );
 }
 

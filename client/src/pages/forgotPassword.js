@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { forgotPassword } from '../redux/actions/authAction';
 
 const ForgotPassword = () => {
   const { auth, alert } = useSelector((state) => state);
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const initialState = {
     email: '',
   };
@@ -15,8 +15,8 @@ const ForgotPassword = () => {
 
   const { email } = data;
   useEffect(() => {
-    if (auth.token) history.push('/');
-  }, [auth.token, history]);
+    if (auth.token) navigate('/');
+  }, [auth.token, navigate]);
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
