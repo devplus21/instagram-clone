@@ -1,33 +1,33 @@
-import { useEffect } from "react";
-import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import { useEffect } from 'react';
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 
-import PageRender from "./customRouter/PageRender";
-import PrivateRouter from "./customRouter/PrivateRouter";
+import PageRender from './customRouter/PageRender';
+import PrivateRouter from './customRouter/PrivateRouter';
 
-import Home from "./pages/home";
-import Login from "./pages/login";
-import Register from "./pages/register";
-import Forgot from "./pages/forgotPassword";
-import Reset from "./pages/resetPassword";
-import Body from "./Body";
+import Home from './pages/home';
+import Login from './pages/login';
+import Register from './pages/register';
+import Forgot from './pages/forgotPassword';
+import Reset from './pages/resetPassword';
+import Body from './Body';
 
-import Alert from "./components/alert/Alert";
-import Header from "./components/header/Header";
-import StatusModal from "./components/StatusModal";
-import NotFound from "./components/NotFound";
+import Alert from './components/alert/Alert';
+import Header from './components/header/Header';
+import StatusModal from './components/StatusModal';
+import NotFound from './components/NotFound';
 
-import { useSelector, useDispatch } from "react-redux";
-import { refreshToken } from "./redux/actions/authAction";
-import { getPosts } from "./redux/actions/postAction";
-import { getSuggestions } from "./redux/actions/suggestionsAction";
+import { useSelector, useDispatch } from 'react-redux';
+import { refreshToken } from './redux/actions/authAction';
+import { getPosts } from './redux/actions/postAction';
+import { getSuggestions } from './redux/actions/suggestionsAction';
 
-import io from "socket.io-client";
-import { GLOBALTYPES } from "./redux/actions/globalTypes";
-import SocketClient from "./SocketClient";
+import io from 'socket.io-client';
+import { GLOBALTYPES } from './redux/actions/globalTypes';
+import SocketClient from './SocketClient';
 
-import { getNotifies } from "./redux/actions/notifyAction";
-import CallModal from "./components/message/CallModal";
-import Peer from "peerjs";
+import { getNotifies } from './redux/actions/notifyAction';
+import CallModal from './components/message/CallModal';
+import Peer from 'peerjs';
 
 function App() {
   const { auth, status, modal, call } = useSelector((state) => state);
@@ -52,12 +52,12 @@ function App() {
   }, [dispatch, auth.token]);
 
   useEffect(() => {
-    if (!("Notification" in window)) {
-      alert("This browser does not support desktop notification");
-    } else if (Notification.permission === "granted") {
-    } else if (Notification.permission !== "denied") {
+    if (!('Notification' in window)) {
+      alert('This browser does not support desktop notification');
+    } else if (Notification.permission === 'granted') {
+    } else if (Notification.permission !== 'denied') {
       Notification.requestPermission().then(function (permission) {
-        if (permission === "granted") {
+        if (permission === 'granted') {
         }
       });
     }
@@ -65,7 +65,7 @@ function App() {
 
   useEffect(() => {
     const newPeer = new Peer(undefined, {
-      path: "/",
+      path: '/',
       secure: true,
     });
 
@@ -77,7 +77,7 @@ function App() {
       <Alert />
 
       <input type="checkbox" id="theme" />
-      <div className={`App ${(status || modal) && "mode"}`}>
+      <div className={`App ${(status || modal) && 'mode'}`}>
         <div className="main">
           {auth.token && <Header />}
           {status && <StatusModal />}

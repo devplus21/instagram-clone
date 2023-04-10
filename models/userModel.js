@@ -30,7 +30,10 @@ const userSchema = new mongoose.Schema(
       default:
         'https://res.cloudinary.com/buivantan/image/upload/v1650440124/avatar/avatar-default_iacjxb.jpg',
     },
-    role: { type: String, default: 'user' },
+    role: {
+      type: String,
+      default: 'User',
+    },
     gender: { type: String, default: 'male' },
     mobile: { type: String, default: '' },
     address: { type: String, default: '' },
