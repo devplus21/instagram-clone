@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Menu from './Menu';
 import Search from './Search';
+import HeaderMenu from './HeaderMenu';
 
 const Header = () => {
   return (
@@ -20,7 +21,7 @@ const Header = () => {
         </Link>
 
         <Search />
-
+        <HeaderMenu />
         <Menu />
       </nav>
     </div>

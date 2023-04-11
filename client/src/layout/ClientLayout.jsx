@@ -1,6 +1,6 @@
+import Header from 'components/header/Header';
 import React from 'react';
 import { ClientRoutes } from 'routes';
-import Header from '../components/Header/Header';
 
 export function ClientLayout() {
   return (

@@ -1,5 +1,5 @@
 import { Button, Dialog } from '@material-ui/core';
-import Search from 'components/Search';
+import Search from 'components/header/Search';
 
 import React from 'react';
 

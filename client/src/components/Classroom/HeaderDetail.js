@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import MenuRight from '../Header/HeaderRight.js.js';
+
 import UTC2 from '../../assets/images/uct2.png';
+import MenuRight from 'components/header/HeaderRight.js';
 
 const HeaderDetail = ({ classroom }) => {
   return (

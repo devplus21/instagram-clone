@@ -2,14 +2,15 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../../redux/actions/authAction';
-import Avatar from '../Common/Avatar';
-import NotifyModal from '../Notify/NotifyModal';
+
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import ChangePassword from '../Profile/changePassword';
 import { Menu, MenuItem } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
 import ClassModal from 'components/Classroom/ClassModal';
 import JoinClass from 'components/JoinClass';
+import ChangePassword from 'components/profile/changePassword';
+import Avatar from 'components/Avatar';
+import NotifyModal from 'components/NotifyModal';
 
 const MenuRight = () => {
   const [anchorEl, setAnchorEl] = useState(null);
