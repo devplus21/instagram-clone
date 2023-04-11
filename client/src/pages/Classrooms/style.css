@@ -1,0 +1,7 @@
+.header_class {
+  display: flex;
+  margin-bottom: 20px;
+}
+.header_class button {
+  margin-left: 15px;
+}

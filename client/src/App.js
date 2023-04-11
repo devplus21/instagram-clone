@@ -24,6 +24,24 @@ import SocketClient from './SocketClient';
 import { getNotifies } from './redux/actions/notifyAction';
 import CallModal from './components/message/CallModal';
 import Peer from 'peerjs';
+import News from 'pages/News';
+import Message from 'pages/message';
+import Conversation from 'pages/message/[id]';
+
+// import Classrooms from './pages/Classrooms';
+// import { ClassLayout } from 'layout/ClassLayout';
+// import HomeClass from './pages/HomeClass';
+// import Exercise from './pages/Exercise';
+// import Feedback from './pages/Feedback';
+// import Point from './pages/Point';
+// import Meeting from './pages/Meeting';
+// import Forum from 'pages/Forum';
+// import About from './pages/About';
+// import AdminRoutes from './routes/AdminRoutes';
+// import ProtectedRoutes from './routes/ProtectedRoutes';
+// import AdminLayout from './layout/AdminLayout';
+
+// import Profile from './pages/profile/[id]';
 
 function App() {
   const { auth, status, modal, call } = useSelector((state) => state);
@@ -82,10 +100,11 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/forgot_password" element={<Forgot />} />
           <Route path="/reset/:token" element={<Reset />} />
-          <Route path="/profile/:id" element={<Profile />} />
-
-          <Route path="/about" element={<About />} />
           <Route path="/new" element={<News />} />
+          <Route path="/message" element={<Message />} />
+          <Route path="/message/:id" element={<Conversation />} />
+          {/* <Route path="/profile/:id" element={<Profile />} /> */}
+          {/* <Route path="/about" element={<About />} />
           <Route path="/classrooms" element={<Classrooms />} />
           <Route path="/classroom">
             <Route path=":id" element={<ClassLayout />}>
@@ -110,7 +129,7 @@ function App() {
                 <AdminLayout />
               </ProtectedRoutes>
             }
-          />
+          /> */}
 
           {/* <PrivateRouter path="/:page" element={<RouterRender />} />
         <PrivateRouter path="/:page/:id" element=

@@ -1,22 +1,22 @@
-import React, { useState, useEffect, useRef } from "react";
-import UserCard from "../UserCard";
-import { useSelector, useDispatch } from "react-redux";
-import { getDataAPI } from "../../utils/fetchData";
-import { GLOBALTYPES } from "../../redux/actions/globalTypes";
-import { useHistory, useParams } from "react-router-dom";
+import React, { useState, useEffect, useRef } from 'react';
+import UserCard from '../UserCard';
+import { useSelector, useDispatch } from 'react-redux';
+import { getDataAPI } from '../../utils/fetchData';
+import { GLOBALTYPES } from '../../redux/actions/globalTypes';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
   MESS_TYPES,
   getConversations,
-} from "../../redux/actions/messageAction";
+} from '../../redux/actions/messageAction';
 
 const LeftSide = () => {
   const { auth, message, online } = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [searchUsers, setSearchUsers] = useState([]);
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const { id } = useParams();
 
   const pageEnd = useRef();
@@ -38,19 +38,19 @@ const LeftSide = () => {
   };
 
   const handleAddUser = (user) => {
-    setSearch("");
+    setSearch('');
     setSearchUsers([]);
     dispatch({
       type: MESS_TYPES.ADD_USER,
-      payload: { ...user, text: "", media: [] },
+      payload: { ...user, text: '', media: [] },
     });
     dispatch({ type: MESS_TYPES.CHECK_ONLINE_OFFLINE, payload: online });
-    return history.push(`/message/${user._id}`);
+    return navigate(`/message/${user._id}`);
   };
 
   const isActive = (user) => {
-    if (id === user._id) return "active";
-    return "";
+    if (id === user._id) return 'active';
+    return '';
   };
 
   useEffect(() => {
@@ -68,7 +68,7 @@ const LeftSide = () => {
       },
       {
         threshold: 0.1,
-      }
+      },
     );
 
     observer.observe(pageEnd.current);
@@ -97,7 +97,7 @@ const LeftSide = () => {
           onChange={(e) => setSearch(e.target.value)}
         />
 
-        <button type="submit" style={{ display: "none" }}>
+        <button type="submit" style={{ display: 'none' }}>
           Tìm kiếm
         </button>
       </form>
@@ -128,7 +128,7 @@ const LeftSide = () => {
                     <i className="fas fa-circle text-success" />
                   ) : (
                     auth.user.following.find(
-                      (item) => item._id === user._id
+                      (item) => item._id === user._id,
                     ) && <i className="fas fa-circle" />
                   )}
                 </UserCard>

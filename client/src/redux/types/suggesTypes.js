@@ -1,0 +1,4 @@
+export const SUGGES_TYPES = {
+  LOADING: 'LOADING_SUGGES',
+  GET_USERS: 'GET_USERS_SUGGES',
+};
