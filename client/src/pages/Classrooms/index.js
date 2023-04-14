@@ -6,12 +6,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Menu, MenuItem } from '@material-ui/core';
 import React from 'react';
 import ClassModal from '../../components/Classroom/ClassModal';
+import { GLOBALTYPES } from '../../redux/actions/globalTypes';
 import JoinClass from 'components/JoinClass';
 import './style.css';
 import Helmet from '../../components/Helmet';
 const Classrooms = () => {
   const [openJoinClass, setOpenJoinClass] = useState(false);
   const [openCreateClass, setOpenCreateClass] = useState(false);
+  const dispatch = useDispatch();
 
   return (
     <Helmet title="Danh sách lớp">
@@ -29,15 +31,15 @@ const Classrooms = () => {
           )}
         </div> */}
         <div className="header_class">
-          <button className="btn" onClick={() => setOpenCreateClass(true)}>
+          <button
+            className="btn"
+            onClick={() =>
+              dispatch({ type: GLOBALTYPES.STATUS_CLASS, payload: true })
+            }
+          >
             Tạo lớp học
           </button>
-          {openCreateClass && (
-            <ClassModal
-              openCreateClass={openCreateClass}
-              setOpenCreateClass={setOpenCreateClass}
-            />
-          )}
+
           <button className="btn" onClick={() => setOpenJoinClass(true)}>
             Tham gia lớp học
           </button>

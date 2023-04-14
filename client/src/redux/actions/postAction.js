@@ -1,20 +1,20 @@
-import { GLOBALTYPES } from "./globalTypes";
-import { imageUpload } from "../../utils/imageUpload";
+import { GLOBALTYPES } from './globalTypes';
+import { imageUpload } from '../../utils/imageUpload';
 import {
   postDataAPI,
   getDataAPI,
   patchDataAPI,
   deleteDataAPI,
-} from "../../utils/fetchData";
-import { createNotify, removeNotify } from "./notifyAction";
+} from '../../utils/fetchData';
+import { createNotify, removeNotify } from './notifyAction';
 
 export const POST_TYPES = {
-  CREATE_POST: "CREATE_POST",
-  LOADING_POST: "LOADING_POST",
-  GET_POSTS: "GET_POSTS",
-  UPDATE_POST: "UPDATE_POST",
-  GET_POST: "GET_POST",
-  DELETE_POST: "DELETE_POST",
+  CREATE_POST: 'CREATE_POST',
+  LOADING_POST: 'LOADING_POST',
+  GET_POSTS: 'GET_POSTS',
+  UPDATE_POST: 'UPDATE_POST',
+  GET_POST: 'GET_POST',
+  DELETE_POST: 'DELETE_POST',
 };
 
 export const createPost =
@@ -26,9 +26,9 @@ export const createPost =
       if (images.length > 0) media = await imageUpload(images);
 
       const res = await postDataAPI(
-        "posts",
+        'posts',
         { content, images: media },
-        auth.token
+        auth.token,
       );
 
       dispatch({
@@ -41,7 +41,7 @@ export const createPost =
       // Notify
       const msg = {
         id: res.data.newPost._id,
-        text: "đã thêm bài đăng mới.",
+        text: 'đã thêm bài đăng mới.',
         recipients: res.data.newPost.user.followers,
         url: `/post/${res.data.newPost._id}`,
         content,
@@ -60,7 +60,7 @@ export const createPost =
 export const getPosts = (token) => async (dispatch) => {
   try {
     dispatch({ type: POST_TYPES.LOADING_POST, payload: true });
-    const res = await getDataAPI("posts", token);
+    const res = await getDataAPI('posts', token);
 
     dispatch({
       type: POST_TYPES.GET_POSTS,
@@ -77,16 +77,16 @@ export const getPosts = (token) => async (dispatch) => {
 };
 
 export const updatePost =
-  ({ content, images, auth, status }) =>
+  ({ content, images, auth, status_post }) =>
   async (dispatch) => {
     let media = [];
     const imgNewUrl = images.filter((img) => !img.url);
     const imgOldUrl = images.filter((img) => img.url);
 
     if (
-      status.content === content &&
+      status_post.content === content &&
       imgNewUrl.length === 0 &&
-      imgOldUrl.length === status.images.length
+      imgOldUrl.length === status_post.images.length
     )
       return;
 
@@ -95,12 +95,12 @@ export const updatePost =
       if (imgNewUrl.length > 0) media = await imageUpload(imgNewUrl);
 
       const res = await patchDataAPI(
-        `post/${status._id}`,
+        `post/${status_post._id}`,
         {
           content,
           images: [...imgOldUrl, ...media],
         },
-        auth.token
+        auth.token,
       );
 
       dispatch({ type: POST_TYPES.UPDATE_POST, payload: res.data.newPost });
@@ -120,7 +120,7 @@ export const likePost =
     const newPost = { ...post, likes: [...post.likes, auth.user] };
     dispatch({ type: POST_TYPES.UPDATE_POST, payload: newPost });
 
-    socket.emit("likePost", newPost);
+    socket.emit('likePost', newPost);
 
     try {
       await patchDataAPI(`post/${post._id}/like`, null, auth.token);
@@ -128,7 +128,7 @@ export const likePost =
       // Notify
       const msg = {
         id: auth.user._id,
-        text: "thích bài đăng của bạn.",
+        text: 'thích bài đăng của bạn.',
         recipients: [post.user._id],
         url: `/post/${post._id}`,
         content: post.content,
@@ -153,7 +153,7 @@ export const unLikePost =
     };
     dispatch({ type: POST_TYPES.UPDATE_POST, payload: newPost });
 
-    socket.emit("unLikePost", newPost);
+    socket.emit('unLikePost', newPost);
 
     try {
       await patchDataAPI(`post/${post._id}/unlike`, null, auth.token);
@@ -161,7 +161,7 @@ export const unLikePost =
       // Notify
       const msg = {
         id: auth.user._id,
-        text: "thích bài đăng của bạn.",
+        text: 'thích bài đăng của bạn.',
         recipients: [post.user._id],
         url: `/post/${post._id}`,
       };
@@ -201,7 +201,7 @@ export const deletePost =
       // Notify
       const msg = {
         id: post._id,
-        text: "đã thêm bài đăng mới.",
+        text: 'đã thêm bài đăng mới.',
         recipients: res.data.newPost.user.followers,
         url: `/post/${post._id}`,
       };

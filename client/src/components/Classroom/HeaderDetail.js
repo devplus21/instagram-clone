@@ -9,7 +9,7 @@ const HeaderDetail = ({ classroom }) => {
     <div className="header">
       <div className="header_left">
         <Link to="/" className="logo">
-          <img src={UTC2} alt="" />
+          {/* <img src={UTC2} alt="" /> */}
         </Link>
         <Link className="header-link" to="/">
           <p className="header-title"> {classroom.className}</p>

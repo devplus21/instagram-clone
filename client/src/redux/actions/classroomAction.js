@@ -55,13 +55,13 @@ export const getClassrooms = (token) => async (dispatch) => {
 };
 
 export const updateClassroom =
-  ({ className, semester, subject, room, auth, status }) =>
+  ({ className, semester, subject, room, auth, status_class }) =>
   async (dispatch) => {
     try {
       dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } });
 
       const res = await patchDataAPI(
-        `classroom/${status._id}`,
+        `classroom/${status_class._id}`,
         {
           className,
           semester,

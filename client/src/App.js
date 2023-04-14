@@ -9,7 +9,8 @@ import Reset from './pages/resetPassword';
 
 import Alert from './components/alert/Alert';
 import Header from './components/header/Header';
-import StatusModal from './components/StatusModal';
+import StatusModal from './components/PostModal';
+import ClassModal from './components/ClassModal';
 import NotFound from './components/NotFound';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -38,12 +39,15 @@ import Meeting from './pages/Meeting';
 import Users from 'pages/Users';
 import AdminRoutes from './routes/AdminRoutes';
 import AdminLayout from './layout/AdminLayout';
+import PostModal from './components/PostModal';
 
 // import ProtectedRoutes from './routes/ProtectedRoutes';
 // import Profile from './pages/profile/[id]';
 
 function App() {
-  const { auth, status, modal, call } = useSelector((state) => state);
+  const { auth, status_post, status_class, modal, call } = useSelector(
+    (state) => state,
+  );
   const { isLogged } = auth;
 
   const dispatch = useDispatch();
@@ -86,11 +90,12 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className={`App ${(status || modal) && 'mode'}`}>
+    <div className={`App ${modal && 'mode'}`}>
       <Alert />
       <div className="main">
         {auth.token && <Header />}
-        {status && <StatusModal />}
+        {status_post && <PostModal />}
+        {status_class && <ClassModal />}
         {auth.token && <SocketClient />}
         {call && <CallModal />}
         <Routes>

@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      default: 'User',
+      default: 'user',
     },
     gender: { type: String, default: 'male' },
     mobile: { type: String, default: '' },

@@ -5,7 +5,8 @@ import UTC2 from '../../assets/images/uct2.png';
 import { GLOBALTYPES } from '../../redux/actions/globalTypes';
 
 import LoadIcon from '../../assets/images/loading.gif';
-import Posts from '../home/Posts';
+import Posts from 'components/home/Posts';
+// import Posts from '../home/Posts';
 let scroll = 0;
 const ClassDetail = ({ classroom }) => {
   const { homePosts } = useSelector((state) => state);
