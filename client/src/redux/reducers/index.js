@@ -24,7 +24,7 @@ import call from './callReducer';
 import peer from './peerReducer';
 import forum from './forumReducer';
 import exercise from './exerciseReducer';
-import homeClassroom from './classroomReducer';
+import home_classroom from './classroomReducer';
 import detailClassroom from './detailClassroomReducer';
 export default combineReducers({
   status_post: statusPostReducer,
@@ -37,7 +37,7 @@ export default combineReducers({
   theme,
   profile,
   exercise,
-  homeClassroom,
+  home_classroom,
   detailClassroom,
   homePosts,
   modal,

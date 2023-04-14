@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import LoadIcon from '../../assets/images/loading.gif';
 import ListClass from 'components/Classroom/LissClass';
 // import Header from 'components/Header/Header';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,6 +14,7 @@ const Classrooms = () => {
   const [openJoinClass, setOpenJoinClass] = useState(false);
   const [openCreateClass, setOpenCreateClass] = useState(false);
   const dispatch = useDispatch();
+  const { home_classroom } = useSelector((state) => state);
 
   return (
     <Helmet title="Danh sách lớp">
@@ -52,7 +53,16 @@ const Classrooms = () => {
           )}
         </div>
 
-        <ListClass />
+        <div className="main__announce ">
+          {home_classroom.loading ? (
+            <img src={LoadIcon} alt="loading" className="d-block mx-auto" />
+          ) : home_classroom.result === 0 &&
+            home_classroom.classrooms.length === 0 ? (
+            <h2 className="text-center">Không Có Bài Đăng</h2>
+          ) : (
+            <ListClass />
+          )}
+        </div>
       </div>
     </Helmet>
   );

@@ -11,7 +11,7 @@ import {
   updateClassroom,
 } from '../redux/actions/classroomAction';
 
-const StatusModal = () => {
+const ClassModal = () => {
   const { auth, theme, status_class, socket } = useSelector((state) => state);
 
   const [className, setClassName] = useState('');
@@ -60,11 +60,11 @@ const StatusModal = () => {
     <div className="status_modal">
       <form onSubmit={handleSubmit}>
         <div className="status_header">
-          <h5 className="m-0">Tạo Bài Đăng</h5>
+          <h5 className="m-0">Tạo Lớp Học</h5>
           <span
             onClick={() =>
               dispatch({
-                type: GLOBALTYPES.STATUS,
+                type: GLOBALTYPES.STATUS_CLASS,
                 payload: false,
               })
             }
@@ -131,4 +131,4 @@ const StatusModal = () => {
   );
 };
 
-export default StatusModal;
+export default ClassModal;

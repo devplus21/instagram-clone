@@ -18,7 +18,7 @@ class APIfeatures {
 }
 
 const classController = {
-  createPost: async (req, res) => {
+  createClassroom: async (req, res) => {
     try {
       const { className, semester, subject, room } = req.body;
 
@@ -42,36 +42,27 @@ const classController = {
       return res.status(500).json({ msg: err.message });
     }
   },
-  getPosts: async (req, res) => {
+  getClassrooms: async (req, res) => {
     try {
       const features = new APIfeatures(
-        Classrooms.find(),
+        Classrooms.find({
+          user: [...req.user.following, req.user._id],
+        }),
         req.query,
       ).paginating();
 
-      // const classroom = await features.query.sort('-createdAt')
+      const classrooms = await features.query.sort('-createdAt');
 
-      // res.json({
-      //   msg: 'Thành công!',
-      //   result: classroom.length,
-      //   classroom,
-      // })
-
-      const result = await Promise.allSettled([
-        features.query,
-        Classrooms.countDocuments(), //count number of products.
-      ]);
-
-      const classrooms =
-        result[0].status === 'fulfilled' ? result[0].value : [];
-      const count = result[1].status === 'fulfilled' ? result[1].value : 0;
-
-      return res.status(200).json({ classrooms, count });
+      res.json({
+        msg: 'Thành công!',
+        result: classrooms.length,
+        classrooms,
+      });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }
   },
-  updatePost: async (req, res) => {
+  updateClassroom: async (req, res) => {
     try {
       const { className, semester, subject, room } = req.body;
 
@@ -104,7 +95,7 @@ const classController = {
     }
   },
 
-  getPost: async (req, res) => {
+  getClassroom: async (req, res) => {
     try {
       const classroom = await Classrooms.findById(req.params.id);
 
@@ -119,7 +110,7 @@ const classController = {
     }
   },
 
-  deletePost: async (req, res) => {
+  deleteClassroom: async (req, res) => {
     try {
       const classroom = await Classrooms.findOneAndDelete({
         _id: req.params.id,

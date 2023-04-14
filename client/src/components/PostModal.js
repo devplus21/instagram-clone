@@ -108,7 +108,7 @@ const PostModal = () => {
     <div className="status_modal">
       <form onSubmit={handleSubmit}>
         <div className="status_header">
-          <h5 className="m-0">Tạo Bài Đăng</h5>
+          <h5 className="m-0">Tạo Thông báo</h5>
           <span
             onClick={() =>
               dispatch({
@@ -204,6 +204,18 @@ const PostModal = () => {
         <div className="status_footer">
           <button className="btn btn-secondary w-100" type="submit">
             Đăng
+          </button>
+          <button
+            className="btn btn-secondary w-100"
+            type="submit"
+            onClick={() =>
+              dispatch({
+                type: GLOBALTYPES.STATUS_POST,
+                payload: false,
+              })
+            }
+          >
+            Hủy
           </button>
         </div>
       </form>

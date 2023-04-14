@@ -4,13 +4,13 @@ const auth = require('../middleware/auth');
 
 router
   .route('/classrooms')
-  .post(auth, classroomController.createPost)
-  .get(auth, classroomController.getPosts);
+  .post(auth, classroomController.createClassroom)
+  .get(auth, classroomController.getClassrooms);
 
 router
   .route('/classroom/:id')
-  .patch(auth, classroomController.updatePost)
-  .get(auth, classroomController.getPost)
-  .delete(auth, classroomController.deletePost);
+  .patch(auth, classroomController.updateClassroom)
+  .get(auth, classroomController.getClassroom)
+  .delete(auth, classroomController.deleteClassroom);
 
 module.exports = router;
